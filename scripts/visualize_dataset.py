@@ -6,11 +6,12 @@ import gym
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--env_name', type=str, default='maze2d-hardexp-v2')
+    parser.add_argument('--h5_path', type=str, help='data path')
     args = parser.parse_args()
 
     env = gym.make(args.env_name)
     
-    dataset = env.get_dataset()
+    dataset = env.get_dataset(args.h5_path)
     if 'infos/qpos' not in dataset:
         raise ValueError('Only MuJoCo-based environments can be visualized')
     qpos = dataset['infos/qpos']
